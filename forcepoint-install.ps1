@@ -14,7 +14,7 @@ $logpath = "C:\Temp\Forcepoint-upgrade-logs"
 If (!(test-path $logpath)){
 New-Item -ItemType Directory -Path $logpath
 }
-$logfile = 'Forcepoint_v22.12.5622_Install-' + (Get-Date -Format 'hh-mm-ss-MM-yyyy') + '.log'
+$logfile = 'Forcepoint_v22.12.5622_Install-' + (Get-Date -Format 'dd-MM-yyyy-hh-mm-ss') + '.log'
 Start-Transcript -Path "$logpath\$logfile" -IncludeInvocationHeader
 Write-Host "Started logging for Forcepoint-upgrade"
 
