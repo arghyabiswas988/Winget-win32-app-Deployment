@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
 Uninstall apps using Winget.
 
@@ -42,18 +42,21 @@ IF ($AppInstaller.Version -ge "2022.506.16.0"){
         $ResolveWingetPath = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe"
         if ($ResolveWingetPath){
                $WingetPath = $ResolveWingetPath[-1].Path
-        }
+            }
     
-        $config
-        cd $wingetpath
-        .\winget.exe uninstall --id $AppId --silent --accept-source-agreements --scope machine
-
-        cd "C:\Windows\system32"
+        #$config
         
+        #$Wingetexe = Join-Path $WingetPath "winget.exe"
+        #Start-Process "$Wingetexe" -argumentlist "uninstall --id $AppId --silent --accept-source-agreements --scope machine" -Wait -WindowStyle Hidden
+        #Write-Host "$Wingetexe"
+        
+        cd $wingetpath
+        .\winget.exe uninstall --id "$AppId" --silent --accept-source-agreements --scope machine
+        cd "C:\Windows\system32"
         }
     Catch {
         Throw "Failed to uninstall App $($AppName)"
-    }
+        }
 }
 Else {
     Write-Host "Winget (Windows package manager) not installed." -ForegroundColor Red
@@ -62,8 +65,6 @@ Else {
 
     Get-Package -Name "*$AppName*" | Uninstall-Package -Force
 }
-
-
 
 Write-Host "Checking for the app after uninstallation..."
 
@@ -80,6 +81,7 @@ else {
     Write-Host "Trying to uinstall using Microsoft Package Manager..." -ForegroundColor yellow
 
     Get-Package -Name "*$AppName*" | Uninstall-Package -Force
+    
     }
 
 Stop-Transcript
