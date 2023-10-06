@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
 Custom app detection script.
 
@@ -20,7 +20,7 @@ $AppId = "Google.Chrome"
 
 $ARPAppName = "Google Chrome"
 
-$ArpVersion = '117.0.5938.134'
+$ArpVersion = '117.0.5938.134' #'117.0.5938.134'
 
 $InstalledApps = Get-Package -Name "*$AppName*" -ErrorAction SilentlyContinue
 
@@ -29,6 +29,6 @@ if ($InstalledApps.Version -ge "$ArpVersion") {
     Exit 0
     }
 else {
-    Write-Host "$($AppName) v$($InstalledApps.Version) not detected." -ForegroundColor Red
+    Write-Host "$($AppName) v$($ArpVersion) not detected." -ForegroundColor Red
     exit 1
     }
