@@ -76,6 +76,10 @@ if ($InstalledApps.Version -eq $null) {
     }
 else {
     Write-Host "$($AppName) v$($InstalledApps.Version) detected after Uninstallation. Uninstallation Failed." -ForegroundColor Red
+
+    Write-Host "Trying to uinstall using Microsoft Package Manager..." -ForegroundColor yellow
+
+    Get-Package -Name "*$AppName*" | Uninstall-Package -Force
     }
 
 Stop-Transcript
