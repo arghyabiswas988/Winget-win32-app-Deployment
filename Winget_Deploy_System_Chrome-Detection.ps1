@@ -29,6 +29,6 @@ if ($InstalledApps.Version -ge "$ArpVersion") {
     Exit 0
     }
 else {
-    Write-Host "$($AppName) not detected." -ForegroundColor Red
+    Write-Host "$($AppName) v$($InstalledApps.Version) not detected." -ForegroundColor Red
     exit 1
     }
