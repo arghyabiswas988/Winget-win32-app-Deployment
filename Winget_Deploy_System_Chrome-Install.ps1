@@ -80,6 +80,7 @@ $InstalledApps = Get-Package -Name "$ARPAppName" -ErrorAction SilentlyContinue
 
 if (($InstalledApps.Version -lt "$ArpVersion") -or ($InstalledApps.Version -eq $null)){
 
+<#
     Write-Host "Checking, if $($AppName) is running..."
     $ChromeRunning = Get-Process | Where-Object Name -Like "*$($AppName)*"
 
@@ -95,7 +96,7 @@ if (($InstalledApps.Version -lt "$ArpVersion") -or ($InstalledApps.Version -eq $
     else{
         Write-Host "$($AppName) is not running." -ForegroundColor Green
         }
-
+#>
     Write-Host "Trying to install $AppName with Winget..." -ForegroundColor Yellow
 
     IF ($AppName){
@@ -109,8 +110,9 @@ if (($InstalledApps.Version -lt "$ArpVersion") -or ($InstalledApps.Version -eq $
 
             cd $wingetpath
             .\winget.exe install --id $AppId --scope machine --silent --accept-source-agreements --accept-package-agreements
-
             cd "C:\Windows\system32"
+
+            #Start-Process "$Wingetexe" -argumentlist "install --id $AppId --scope machine --silent --accept-source-agreements --accept-package-agreements" -Wait -WindowStyle Hidden
         }
     Catch {
         Throw "Failed to install App $($AppName)"
