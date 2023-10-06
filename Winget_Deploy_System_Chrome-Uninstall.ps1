@@ -46,7 +46,7 @@ IF ($AppInstaller.Version -ge "2022.506.16.0"){
     
         $config
         cd $wingetpath
-        .\winget.exe uninstall --id $AppId --scope machine --silent
+        .\winget.exe uninstall --id $AppId --silent --accept-source-agreements --scope machine
 
         cd "C:\Windows\system32"
         
